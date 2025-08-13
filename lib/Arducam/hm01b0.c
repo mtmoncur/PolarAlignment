@@ -211,17 +211,17 @@ void hm01b0_deinit()
 
 void hm01b0_read_frame(uint8_t* buffer, size_t length)
 {
-    struct hm01b0_config* config = &hm01b0_inst.config;printf("Lin 214\n");
+    struct hm01b0_config* config = &hm01b0_inst.config;
 
     pio_sm_init(config->pio, config->pio_sm, hm01b0_inst.pio_program_offset, &hm01b0_inst.pio_sm_config);
 
     int dma_channel = dma_claim_unused_channel(true);
 
     dma_channel_config dcc = dma_channel_get_default_config(dma_channel);
-    channel_config_set_read_increment(&dcc, false);printf("Lin 221\n");
-    channel_config_set_write_increment(&dcc, true);printf("Lin 222\n");
-    channel_config_set_dreq(&dcc, pio_get_dreq(config->pio, config->pio_sm, false));printf("Lin 223\n");
-    channel_config_set_transfer_data_size(&dcc, DMA_SIZE_8); printf("Lin 224\n");
+    channel_config_set_read_increment(&dcc, false);
+    channel_config_set_write_increment(&dcc, true);
+    channel_config_set_dreq(&dcc, pio_get_dreq(config->pio, config->pio_sm, false));
+    channel_config_set_transfer_data_size(&dcc, DMA_SIZE_8);
     
     dma_channel_configure(
         dma_channel,
@@ -230,16 +230,16 @@ void hm01b0_read_frame(uint8_t* buffer, size_t length)
         ((uint8_t*)&config->pio->rxf[config->pio_sm]) + 3,
         length,
         false
-    );printf("Lin 233\n");
+    )
 
-    dma_channel_start(dma_channel);printf("Lin 235\n");
-    pio_sm_set_enabled(config->pio, config->pio_sm, true);printf("Lin 236\n");
-    pio_sm_put_blocking(config->pio, config->pio_sm, config->width * hm01b0_inst.num_pclk_per_px - 1);printf("Lin 237\n");
-    hm01b0_write_reg8(0x0100, 0x01);printf("Lin 238\n"); // MODE_SELECT
-    dma_channel_wait_for_finish_blocking(dma_channel);printf("Lin 239\n");
+    dma_channel_start(dma_channel);
+    pio_sm_set_enabled(config->pio, config->pio_sm, true);
+    pio_sm_put_blocking(config->pio, config->pio_sm, config->width * hm01b0_inst.num_pclk_per_px - 1);
+    hm01b0_write_reg8(0x0100, 0x01);; // MODE_SELECT
+    dma_channel_wait_for_finish_blocking(dma_channel);
 
-    pio_sm_set_enabled(config->pio, config->pio_sm, false);printf("Lin 241\n");
-    dma_channel_unclaim(dma_channel);printf("Lin 242\n");
+    pio_sm_set_enabled(config->pio, config->pio_sm, false);
+    dma_channel_unclaim(dma_channel);
     hm01b0_write_reg8(0x0100, 0x00); // MODE_SELECT
 }
 

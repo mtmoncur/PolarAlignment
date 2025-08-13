@@ -163,13 +163,13 @@ UBYTE DEV_Module_Init(void)
     pwm_set_clkdiv(slice_num,50);
     pwm_set_enabled(slice_num, true);
     
-    
-    //I2C Config
-    i2c_init(i2c1,300*1000);
-    gpio_set_function(LCD_SDA_PIN,GPIO_FUNC_I2C);
-    gpio_set_function(LCD_SCL_PIN,GPIO_FUNC_I2C);
-    gpio_pull_up(LCD_SDA_PIN);
-    gpio_pull_up(LCD_SCL_PIN);
+    // I'm not using this feature, and it conflicts with my other modules
+    // //I2C Config
+    // i2c_init(i2c1,300*1000);
+    // gpio_set_function(LCD_SDA_PIN,GPIO_FUNC_I2C);
+    // gpio_set_function(LCD_SCL_PIN,GPIO_FUNC_I2C);
+    // gpio_pull_up(LCD_SDA_PIN);
+    // gpio_pull_up(LCD_SCL_PIN);
     
     printf("DEV_Module_Init OK \r\n");
     return 0;

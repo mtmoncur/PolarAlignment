@@ -1,17 +1,3 @@
-// #include <stdio.h>
-// #include "pico/stdlib.h"
-
-
-// int main()
-// {
-//     stdio_init_all();
-
-//     while (true) {
-//         printf("Hello, world!\n");
-//         sleep_ms(1000);
-//     }
-// }
-
 #include "LCD_Test.h"   //Examples
 
 int main(void)
@@ -29,6 +15,7 @@ int main(void)
     //LCD_1in44_test();
     //LCD_1in8_test();
     //LCD_2in_test();
-    CameraDisplay();
+    // CameraDisplay();
+    
     return 0;
 }

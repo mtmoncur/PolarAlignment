@@ -230,7 +230,7 @@ void hm01b0_read_frame(uint8_t* buffer, size_t length)
         ((uint8_t*)&config->pio->rxf[config->pio_sm]) + 3,
         length,
         false
-    )
+    );
 
     dma_channel_start(dma_channel);
     pio_sm_set_enabled(config->pio, config->pio_sm, true);
